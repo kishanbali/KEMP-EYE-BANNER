@@ -8,510 +8,191 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,600&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --bg-deep:#0a0b1f;
-    --bg-mid:#171142;
-    --bg-glow-blue:#5aa2ff;
-    --bg-glow-gold:#ffcd66;
-    --gold:#ffd782;
-    --gold-soft:#ffe6ad;
-    --ink:#eef1ff;
-    --panel:#141a3aCC;
-    --ring-blue:#6fb0ff;
-  }
-  *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;width:100%;overflow-x:hidden;background:#000;}
-  body{
-    font-family:'Poppins',sans-serif;
-    color:var(--ink);
-    display:flex;
-    justify-content:center;
-  }
-  .banner{
-    position:relative;
-    width:100%;
-    max-width:100%;
-    border-radius:22px;
-    overflow:hidden;
-    background:
-      radial-gradient(600px 420px at 52% 22%, rgba(90,160,255,0.28), transparent 60%),
-      radial-gradient(420px 320px at 52% 22%, rgba(255,205,120,0.18), transparent 65%),
-      radial-gradient(500px 400px at 10% 62%, rgba(90,160,255,0.14), transparent 60%),
-      radial-gradient(500px 400px at 92% 62%, rgba(90,160,255,0.14), transparent 60%),
-      linear-gradient(180deg, var(--bg-mid) 0%, var(--bg-deep) 46%, #06070f 100%);
-    box-shadow: 0 30px 80px rgba(0,0,0,0.55);
-    padding:24px;
-  }
-  .stars{
-    position:absolute; inset:0;
-    background-image:
-      radial-gradient(1.5px 1.5px at 12% 18%, #fff, transparent),
-      radial-gradient(1.5px 1.5px at 78% 8%, #fff, transparent),
-      radial-gradient(1px 1px at 33% 44%, #ffe6ad, transparent),
-      radial-gradient(1.5px 1.5px at 64% 30%, #cfe0ff, transparent),
-      radial-gradient(1px 1px at 90% 60%, #fff, transparent),
-      radial-gradient(1.5px 1.5px at 6% 70%, #cfe0ff, transparent),
-      radial-gradient(1px 1px at 48% 82%, #fff, transparent),
-      radial-gradient(1.5px 1.5px at 85% 88%, #ffe6ad, transparent);
-    background-repeat:no-repeat;
-    opacity:.9;
-    pointer-events:none;
-  }
-  .top{
-    position:relative;
-    display:flex;
-    align-items:flex-start;
-    gap:28px;
-    padding:38px 44px 46px 54px;
-    border-bottom:2px solid rgba(200,215,255,0.55);
-    flex-wrap:wrap;
-  }
-  .title-block{ flex:1 1 380px; }
-  .hero-col{ flex:0 0 340px; }
-  .right-col{ flex:1 1 460px; display:flex; gap:18px; align-items:flex-start; flex-wrap:wrap; }
-  .right-col .bubble{ flex:1 1 300px; }
-  .right-col .buttons{ flex:0 0 190px; }
-  .title-block h1{
-    margin:0;
-    font-family:'Poppins',sans-serif;
-    font-weight:800;
-    font-size:clamp(38px,4.6vw,64px);
-    line-height:0.98;
-    letter-spacing:1px;
-  }
-  .title-block .k{
-    color:var(--gold-soft);
-    text-shadow:0 0 18px rgba(255,205,120,0.55), 0 0 40px rgba(255,180,80,0.25);
-  }
-  .title-block .e{
-    color:#fff;
-    text-shadow:0 0 18px rgba(140,180,255,0.55), 0 0 40px rgba(110,150,255,0.3);
-    display:inline-flex;
-    align-items:center;
-    gap:14px;
-  }
-  .mini-eye-wrap{
-    display:inline-flex;
-    width:74px; height:74px;
-    position:relative;
-    flex-shrink:0;
-    vertical-align:middle;
-  }
-  .mini-eye-wrap .eye{ width:100%; height:100%; }
-  .tagline{
-    margin:16px 0 6px;
-    font-size:15px;
-    color:#dde3f7;
-  }
-  .ask-line{
-    font-family:'Playfair Display',serif;
-    font-style:italic;
-    font-weight:600;
-    color:var(--gold);
-    font-size:clamp(18px,1.8vw,24px);
-    margin:2px 0 8px;
-    text-shadow:0 0 14px rgba(255,205,120,0.35);
-  }
-  .notice-line{
-    font-size:12.5px;
-    letter-spacing:3px;
-    color:#c9d2f0;
-    font-weight:600;
-  }
-  .eye{
-    border-radius:50%;
-    background-size:cover;
-    background-position:center;
-    position:relative;
-    overflow:hidden;
-    box-shadow:
-      inset 0 0 18px rgba(0,0,0,0.35),
-      inset 8px 8px 20px rgba(255,255,255,0.15);
-  }
-  .eye::before{
-    content:"";
-    position:absolute;
-    top:8%; left:12%;
-    width:42%; height:34%;
-    background:radial-gradient(circle, rgba(255,255,255,0.85), rgba(255,255,255,0) 70%);
-    border-radius:50%;
-    filter:blur(2px);
-  }
-  .eye::after{
-    content:"";
-    position:absolute; inset:0;
-    border-radius:50%;
-    box-shadow: inset 0 0 26px 6px rgba(90,160,255,0.35);
-  }
-  .ring{
-    position:absolute; inset:-8px;
-    border-radius:50%;
-    border:3px solid var(--ring-blue);
-    box-shadow:
-      0 0 18px 4px rgba(111,176,255,0.65),
-      0 0 34px 10px rgba(111,176,255,0.35);
-  }
-  .ring::after{
-    content:"";
-    position:absolute; inset:-6px;
-    border-radius:50%;
-    border:2px solid var(--gold);
-    box-shadow:0 0 12px 2px rgba(255,215,130,0.55);
-  }
-  .eye-wrap{ position:relative; display:inline-block; }
-  .lid{
-    position:absolute;
-    left:-2px; right:-2px; top:-2px;
-    background:#d6b696;
-    border-radius:0 0 50% 50%/0 0 65% 65%;
-  }
-  .lid::after{
-    content:"";
-    position:absolute; left:0; right:0; bottom:0;
-    height:3px;
-    background:#2a1c12;
-    border-radius:0 0 50% 50%/0 0 100% 100%;
-  }
-  .lid.full{
-    border-radius:0;
-    left:0; right:0; top:0;
-    background:
-      radial-gradient(120% 90% at 50% 0%, #c2a17c 0%, #d6b696 55%, #d6b696 100%);
-  }
-  .lash-row{
-    position:absolute; left:8%; right:8%; bottom:3px;
-    height:14px;
-    background-repeat:repeat-x;
-    background-size:9px 14px;
-    background-image:linear-gradient(#2a1c12,#2a1c12);
-    clip-path:polygon(0 100%,3px 0,6px 100%,9px 0,12px 100%,15px 0,18px 100%,21px 0,24px 100%,27px 0,30px 100%);
-    opacity:.85;
-  }
-  .hero-col{ display:flex; flex-direction:column; align-items:center; }
-  .hero-eye-wrap{ width:min(360px,26vw); }
-  .hero-eye{
-    width:100%; padding-top:100%;
-    background-color:#2d2560;
-    border-radius:50%;
-  }
-  .hero-eye .lid{ height:36%; }
-  .hero-smile{
-    width:34%; margin:10px auto 0; height:10px;
-    border-bottom:4px solid #14101f;
-    border-radius:50%;
-  }
-  .beam{
-    width:70%;
-    height:26px;
-    margin-top:6px;
-    background:radial-gradient(ellipse at center, rgba(255,220,150,0.55), transparent 70%);
-    filter:blur(6px);
-  }
-  .ripples{
-    width:96%;
-    height:44px;
-    margin-top:-14px;
-    background:
-      repeating-radial-gradient(ellipse at center,
-        rgba(111,176,255,0.5) 0px, rgba(111,176,255,0.5) 1.5px,
-        transparent 3px, transparent 9px);
-    border-radius:50%;
-    opacity:.8;
-  }
-  .bubble{
-    position:relative;
-    background:var(--panel);
-    border:2px solid #8fb6ff;
-    border-radius:22px;
-    padding:18px 24px;
-    box-shadow:0 0 24px rgba(111,176,255,0.35);
-    backdrop-filter: blur(2px);
-    justify-self:start;
-    max-width:340px;
-  }
-  .bubble::before{
-    content:"";
-    position:absolute; left:-18px; bottom:22px;
-    width:0;height:0;
-    border-top:14px solid transparent;
-    border-bottom:6px solid transparent;
-    border-right:20px solid #8fb6ff;
-  }
-  .bubble::after{
-    content:"";
-    position:absolute; left:-14px; bottom:24px;
-    width:0;height:0;
-    border-top:11px solid transparent;
-    border-bottom:5px solid transparent;
-    border-right:16px solid #141a3a;
-  }
-  .bubble .hi{
-    font-family:'Playfair Display',serif; font-style:italic; font-weight:600;
-    color:var(--gold); font-size:24px;
-  }
-  .bubble .im{ font-size:19px; margin:6px 0; }
-  .bubble .im b{ color:var(--gold); }
-  .bubble p{ margin:4px 0; font-size:15px; color:#dfe4fb; line-height:1.5;}
-  .buttons{ display:flex; flex-direction:column; gap:10px; width:100%; }
-  .btn{
-    display:flex; align-items:center; gap:12px;
-    border:1.5px solid var(--ring-blue);
-    border-radius:14px;
-    padding:10px 14px;
-    background:rgba(15,20,45,0.55);
-    box-shadow:0 0 14px rgba(111,176,255,0.25);
-    cursor:pointer;
-    transition: all 0.3s ease;
-  }
-  .btn:hover{
-    background:rgba(15,20,45,0.85);
-    box-shadow:0 0 20px rgba(111,176,255,0.45);
-    transform:translateY(-2px);
-  }
-  .btn .ic{ width:26px; height:26px; flex-shrink:0; }
-  .btn .lbl b{ display:block; font-size:14px; color:#fff; }
-  .btn .lbl span{ font-size:11.5px; color:#b9c3e6; }
-  .btn.pink{ border-color:#ff8fc0; box-shadow:0 0 14px rgba(255,143,192,0.25); }
-  .btn.gold{ border-color:var(--gold); box-shadow:0 0 14px rgba(255,215,130,0.3); }
-  .btn.purple{ border-color:#b39bff; box-shadow:0 0 14px rgba(179,155,255,0.25); }
-  .audio-control{
-    position:fixed; bottom:20px; right:20px;
-    background:var(--panel);
-    border:2px solid var(--ring-blue);
-    border-radius:16px;
-    padding:16px;
-    box-shadow:0 0 24px rgba(111,176,255,0.45);
-    backdrop-filter:blur(4px);
-    max-width:280px;
-    z-index:1000;
-  }
-  .audio-control .title{
-    font-size:12px;
-    letter-spacing:2px;
-    color:var(--gold);
-    font-weight:700;
-    margin-bottom:12px;
-    text-transform:uppercase;
-  }
-  .volume-slider{
-    width:100%;
-    height:6px;
-    border-radius:3px;
-    background:rgba(111,176,255,0.2);
-    appearance:none;
-    -webkit-appearance:none;
-    cursor:pointer;
-    margin-bottom:12px;
-  }
-  .volume-slider::-webkit-slider-thumb{
-    appearance:none;
-    -webkit-appearance:none;
-    width:14px;
-    height:14px;
-    border-radius:50%;
-    background:var(--gold);
-    cursor:pointer;
-    box-shadow:0 0 8px rgba(255,215,130,0.6);
-  }
-  .volume-slider::-moz-range-thumb{
-    width:14px;
-    height:14px;
-    border-radius:50%;
-    background:var(--gold);
-    cursor:pointer;
-    border:none;
-    box-shadow:0 0 8px rgba(255,215,130,0.6);
-  }
-  .audio-buttons{
-    display:flex; gap:8px; flex-wrap:wrap;
-  }
-  .audio-btn{
-    flex:1; min-width:120px;
-    padding:8px 12px;
-    border:1.5px solid #8fb6ff;
-    border-radius:8px;
-    background:rgba(15,20,45,0.6);
-    color:#fff;
-    font-size:12px;
-    font-weight:600;
-    cursor:pointer;
-    transition:all 0.3s ease;
-  }
-  .audio-btn:hover{
-    background:rgba(15,20,45,0.9);
-    box-shadow:0 0 12px rgba(111,176,255,0.35);
-  }
-  .audio-btn.active{
-    border-color:var(--gold);
-    background:rgba(255,215,130,0.15);
-    box-shadow:0 0 14px rgba(255,215,130,0.35);
-    color:var(--gold);
-  }
-  .audio-status{
-    font-size:11px;
-    color:#b9c3e6;
-    text-align:center;
-    margin-top:10px;
-    height:16px;
-    font-style:italic;
-  }
-  .bottom{ position:relative; padding:34px 40px 30px; }
-  .steps{
-    display:flex; justify-content:space-between; align-items:flex-start;
-    max-width:1300px; margin:0 auto;
-  }
-  .step{ display:flex; flex-direction:column; align-items:center; width:150px; }
-  .step .eye-wrap{ width:120px; height:120px; }
-  .step .eye{ width:100%; height:100%; }
-  .step .smile{
-    width:36px; height:8px; margin-top:8px;
-    border-bottom:3px solid #14101f; border-radius:50%;
-  }
-  .step .lbl{
-    margin-top:14px; font-weight:700; color:var(--gold);
-    font-size:15px; letter-spacing:.5px; text-shadow:0 0 10px rgba(255,205,120,.35);
-    text-align:center;
-  }
-  .arrow{
-    align-self:center; margin-top:56px;
-    width:44px; height:14px; position:relative;
-  }
-  .arrow::before{
-    content:""; position:absolute; left:0; top:6px; width:32px; height:3px; background:var(--gold);
-  }
-  .arrow::after{
-    content:""; position:absolute; right:0; top:0;
-    border-top:7px solid transparent; border-bottom:7px solid transparent; border-left:12px solid var(--gold);
-  }
-  .quote-bar{
-    max-width:1300px; margin:34px auto 0;
-    border:2px solid #8fb6ff;
-    border-radius:30px;
-    padding:20px 32px;
-    background:var(--panel);
-    box-shadow:0 0 26px rgba(111,176,255,0.3);
-    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;
-    font-family:'Playfair Display',serif; font-style:italic;
-  }
-  .quote-bar .left{ font-size:17px; }
-  .quote-bar .left .quote{ color:var(--gold); font-weight:700; }
-  .quote-bar .right{ font-weight:700; color:var(--gold); font-size:16px; white-space:nowrap; }
-  @media (max-width:900px){
-    .top{ grid-template-columns:1fr; text-align:center; }
-    .title-block .e{ justify-content:center; }
-    .bubble{ justify-self:center; }
-    .buttons{ flex-direction:row; flex-wrap:wrap; justify-content:center; }
-    .steps{ flex-wrap:wrap; row-gap:26px; justify-content:center; }
-    .arrow{ display:none; }
-    .audio-control{ bottom:10px; right:10px; max-width:260px; }
-  }
+:root{--bg-deep:#0a0b1f;--bg-mid:#171142;--bg-glow-blue:#5aa2ff;--bg-glow-gold:#ffcd66;--gold:#ffd782;--gold-soft:#ffe6ad;--ink:#eef1ff;--panel:#141a3aCC;--ring-blue:#6fb0ff;}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;width:100%;overflow-x:hidden;background:#000;}
+body{font-family:'Poppins',sans-serif;color:var(--ink);display:flex;justify-content:center;}
+.banner{position:relative;width:100%;max-width:100%;border-radius:22px;overflow:hidden;background:radial-gradient(600px 420px at 52% 22%,rgba(90,160,255,0.28),transparent 60%),radial-gradient(420px 320px at 52% 22%,rgba(255,205,120,0.18),transparent 65%),radial-gradient(500px 400px at 10% 62%,rgba(90,160,255,0.14),transparent 60%),radial-gradient(500px 400px at 92% 62%,rgba(90,160,255,0.14),transparent 60%),linear-gradient(180deg,var(--bg-mid) 0%,var(--bg-deep) 46%,#06070f 100%);box-shadow:0 30px 80px rgba(0,0,0,0.55);padding:24px;}
+.stars{position:absolute;inset:0;background-image:radial-gradient(1.5px 1.5px at 12% 18%,#fff,transparent),radial-gradient(1.5px 1.5px at 78% 8%,#fff,transparent),radial-gradient(1px 1px at 33% 44%,#ffe6ad,transparent),radial-gradient(1.5px 1.5px at 64% 30%,#cfe0ff,transparent),radial-gradient(1px 1px at 90% 60%,#fff,transparent),radial-gradient(1.5px 1.5px at 6% 70%,#cfe0ff,transparent),radial-gradient(1px 1px at 48% 82%,#fff,transparent),radial-gradient(1.5px 1.5px at 85% 88%,#ffe6ad,transparent);background-repeat:no-repeat;opacity:.9;pointer-events:none;}
+.top{position:relative;display:flex;align-items:flex-start;gap:28px;padding:38px 44px 46px 54px;border-bottom:2px solid rgba(200,215,255,0.55);flex-wrap:wrap;}
+.title-block{flex:1 1 380px;}
+.hero-col{flex:0 0 340px;}
+.right-col{flex:1 1 460px;display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap;}
+.right-col .bubble{flex:1 1 300px;}
+.right-col .buttons{flex:0 0 190px;}
+.title-block h1{margin:0;font-family:'Poppins',sans-serif;font-weight:800;font-size:clamp(38px,4.6vw,64px);line-height:0.98;letter-spacing:1px;}
+.title-block .k{color:var(--gold-soft);text-shadow:0 0 18px rgba(255,205,120,0.55),0 0 40px rgba(255,180,80,0.25);}
+.title-block .e{color:#fff;text-shadow:0 0 18px rgba(140,180,255,0.55),0 0 40px rgba(110,150,255,0.3);display:inline-flex;align-items:center;gap:14px;}
+.mini-eye-wrap{display:inline-flex;width:74px;height:74px;position:relative;flex-shrink:0;vertical-align:middle;}
+.mini-eye-wrap .eye{width:100%;height:100%;}
+.tagline{margin:16px 0 6px;font-size:15px;color:#dde3f7;}
+.ask-line{font-family:'Playfair Display',serif;font-style:italic;font-weight:600;color:var(--gold);font-size:clamp(18px,1.8vw,24px);margin:2px 0 8px;text-shadow:0 0 14px rgba(255,205,120,0.35);}
+.notice-line{font-size:12.5px;letter-spacing:3px;color:#c9d2f0;font-weight:600;}
+.eye{border-radius:50%;background-size:cover;background-position:center;background-color:#2d2560;position:relative;overflow:hidden;box-shadow:inset 0 0 18px rgba(0,0,0,0.35),inset 8px 8px 20px rgba(255,255,255,0.15);}
+.eye::before{content:"";position:absolute;top:8%;left:12%;width:42%;height:34%;background:radial-gradient(circle,rgba(255,255,255,0.85),rgba(255,255,255,0) 70%);border-radius:50%;filter:blur(2px);}
+.eye::after{content:"";position:absolute;inset:0;border-radius:50%;box-shadow:inset 0 0 26px 6px rgba(90,160,255,0.35);}
+.ring{position:absolute;inset:-8px;border-radius:50%;border:3px solid var(--ring-blue);box-shadow:0 0 18px 4px rgba(111,176,255,0.65),0 0 34px 10px rgba(111,176,255,0.35);}
+.ring::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid var(--gold);box-shadow:0 0 12px 2px rgba(255,215,130,0.55);}
+.eye-wrap{position:relative;display:inline-block;}
+.lid{position:absolute;left:-2px;right:-2px;top:-2px;background:#d6b696;border-radius:0 0 50% 50%/0 0 65% 65%;}
+.lid::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:#2a1c12;border-radius:0 0 50% 50%/0 0 100% 100%;}
+.lid.full{border-radius:0;left:0;right:0;top:0;background:radial-gradient(120% 90% at 50% 0%,#c2a17c 0%,#d6b696 55%,#d6b696 100%);}
+.lash-row{position:absolute;left:8%;right:8%;bottom:3px;height:14px;background-repeat:repeat-x;background-size:9px 14px;background-image:linear-gradient(#2a1c12,#2a1c12);clip-path:polygon(0 100%,3px 0,6px 100%,9px 0,12px 100%,15px 0,18px 100%,21px 0,24px 100%,27px 0,30px 100%);opacity:.85;}
+.hero-col{display:flex;flex-direction:column;align-items:center;}
+.hero-eye-wrap{width:min(360px,26vw);}
+.hero-eye{width:100%;padding-top:100%;background-color:#2d2560;border-radius:50%;}
+.hero-eye .lid{height:36%;}
+.hero-smile{width:34%;margin:10px auto 0;height:10px;border-bottom:4px solid #14101f;border-radius:50%;}
+.beam{width:70%;height:26px;margin-top:6px;background:radial-gradient(ellipse at center,rgba(255,220,150,0.55),transparent 70%);filter:blur(6px);}
+.ripples{width:96%;height:44px;margin-top:-14px;background:repeating-radial-gradient(ellipse at center,rgba(111,176,255,0.5) 0px,rgba(111,176,255,0.5) 1.5px,transparent 3px,transparent 9px);border-radius:50%;opacity:.8;}
+.bubble{position:relative;background:var(--panel);border:2px solid #8fb6ff;border-radius:22px;padding:18px 24px;box-shadow:0 0 24px rgba(111,176,255,0.35);backdrop-filter:blur(2px);justify-self:start;max-width:340px;}
+.bubble::before{content:"";position:absolute;left:-18px;bottom:22px;width:0;height:0;border-top:14px solid transparent;border-bottom:6px solid transparent;border-right:20px solid #8fb6ff;}
+.bubble::after{content:"";position:absolute;left:-14px;bottom:24px;width:0;height:0;border-top:11px solid transparent;border-bottom:5px solid transparent;border-right:16px solid #141a3a;}
+.bubble .hi{font-family:'Playfair Display',serif;font-style:italic;font-weight:600;color:var(--gold);font-size:24px;}
+.bubble .im{font-size:19px;margin:6px 0;}
+.bubble .im b{color:var(--gold);}
+.bubble p{margin:4px 0;font-size:15px;color:#dfe4fb;line-height:1.5;}
+.buttons{display:flex;flex-direction:column;gap:10px;width:100%;}
+.btn{display:flex;align-items:center;gap:12px;border:1.5px solid var(--ring-blue);border-radius:14px;padding:10px 14px;background:rgba(15,20,45,0.55);box-shadow:0 0 14px rgba(111,176,255,0.25);cursor:pointer;transition:all 0.3s ease;}
+.btn:hover{background:rgba(15,20,45,0.85);box-shadow:0 0 20px rgba(111,176,255,0.45);transform:translateY(-2px);}
+.btn .ic{width:26px;height:26px;flex-shrink:0;}
+.btn .lbl b{display:block;font-size:14px;color:#fff;}
+.btn .lbl span{font-size:11.5px;color:#b9c3e6;}
+.btn.pink{border-color:#ff8fc0;box-shadow:0 0 14px rgba(255,143,192,0.25);}
+.btn.gold{border-color:var(--gold);box-shadow:0 0 14px rgba(255,215,130,0.3);}
+.btn.purple{border-color:#b39bff;box-shadow:0 0 14px rgba(179,155,255,0.25);}
+.audio-control{position:fixed;bottom:20px;right:20px;background:var(--panel);border:2px solid var(--ring-blue);border-radius:16px;padding:16px;box-shadow:0 0 24px rgba(111,176,255,0.45);backdrop-filter:blur(4px);max-width:280px;z-index:1000;}
+.audio-control .title{font-size:12px;letter-spacing:2px;color:var(--gold);font-weight:700;margin-bottom:12px;text-transform:uppercase;}
+.volume-slider{width:100%;height:6px;border-radius:3px;background:rgba(111,176,255,0.2);appearance:none;-webkit-appearance:none;cursor:pointer;margin-bottom:12px;}
+.volume-slider::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:var(--gold);cursor:pointer;box-shadow:0 0 8px rgba(255,215,130,0.6);}
+.volume-slider::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--gold);cursor:pointer;border:none;box-shadow:0 0 8px rgba(255,215,130,0.6);}
+.audio-buttons{display:flex;gap:8px;flex-wrap:wrap;}
+.audio-btn{flex:1;min-width:120px;padding:8px 12px;border:1.5px solid #8fb6ff;border-radius:8px;background:rgba(15,20,45,0.6);color:#fff;font-size:12px;font-weight:600;cursor:pointer;transition:all 0.3s ease;}
+.audio-btn:hover{background:rgba(15,20,45,0.9);box-shadow:0 0 12px rgba(111,176,255,0.35);}
+.audio-btn.active{border-color:var(--gold);background:rgba(255,215,130,0.15);box-shadow:0 0 14px rgba(255,215,130,0.35);color:var(--gold);}
+.audio-status{font-size:11px;color:#b9c3e6;text-align:center;margin-top:10px;height:16px;font-style:italic;}
+.bottom{position:relative;padding:34px 40px 30px;}
+.steps{display:flex;justify-content:space-between;align-items:flex-start;max-width:1300px;margin:0 auto;}
+.step{display:flex;flex-direction:column;align-items:center;width:150px;}
+.step .eye-wrap{width:120px;height:120px;}
+.step .eye{width:100%;height:100%;}
+.step .smile{width:36px;height:8px;margin-top:8px;border-bottom:3px solid #14101f;border-radius:50%;}
+.step .lbl{margin-top:14px;font-weight:700;color:var(--gold);font-size:15px;letter-spacing:.5px;text-shadow:0 0 10px rgba(255,205,120,.35);text-align:center;}
+.arrow{align-self:center;margin-top:56px;width:44px;height:14px;position:relative;}
+.arrow::before{content:"";position:absolute;left:0;top:6px;width:32px;height:3px;background:var(--gold);}
+.arrow::after{content:"";position:absolute;right:0;top:0;border-top:7px solid transparent;border-bottom:7px solid transparent;border-left:12px solid var(--gold);}
+.quote-bar{max-width:1300px;margin:34px auto 0;border:2px solid #8fb6ff;border-radius:30px;padding:20px 32px;background:var(--panel);box-shadow:0 0 26px rgba(111,176,255,0.3);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-family:'Playfair Display',serif;font-style:italic;}
+.quote-bar .left{font-size:17px;}
+.quote-bar .left .quote{color:var(--gold);font-weight:700;}
+.quote-bar .right{font-weight:700;color:var(--gold);font-size:16px;white-space:nowrap;}
+@media (max-width:900px){
+.top{grid-template-columns:1fr;text-align:center;}
+.title-block .e{justify-content:center;}
+.bubble{justify-self:center;}
+.buttons{flex-direction:row;flex-wrap:wrap;justify-content:center;}
+.steps{flex-wrap:wrap;row-gap:26px;justify-content:center;}
+.arrow{display:none;}
+.audio-control{bottom:10px;right:10px;max-width:260px;}
+}
 </style>
 </head>
 <body>
 <div class="banner">
-  <div class="stars"></div>
-  <div class="top">
-    <div class="title-block">
-      <h1><span class="k">KEMP</span><br><span class="e">EYE <span class="mini-eye-wrap"><div class="ring"></div><div class="eye"></div></span></span></h1>
-      <div class="tagline">Your AI Tracker&nbsp; •&nbsp; Your Reflection Companion</div>
-      <div class="ask-line">Ask · Feel · Express · Discover</div>
-      <div class="notice-line">NOTICE&nbsp; •&nbsp; FEEL&nbsp; •&nbsp; TUNE&nbsp; •&nbsp; BE</div>
-    </div>
-    <div class="hero-col">
-      <div class="eye-wrap hero-eye-wrap">
-        <div class="ring"></div>
-        <div class="eye hero-eye"></div>
-      </div>
-      <div class="hero-smile"></div>
-      <div class="beam"></div>
-      <div class="ripples"></div>
-    </div>
-    <div class="right-col">
-      <div class="bubble">
-        <div class="hi">Hi there! 💙</div>
-        <div class="im">I'm <b>KEMP EYE</b> ☺</div>
-        <p>I see your questions.<br>I feel your curiosity.<br>Let's explore together!</p>
-      </div>
-      <div class="buttons">
-        <div class="btn" data-sound="ask">
-          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#6fb0ff" stroke-width="2"><path d="M4 4h16v12H8l-4 4z"/></svg>
-          <div class="lbl"><b>Ask Me</b><span>Any Question</span></div>
-        </div>
-        <div class="btn pink" data-sound="reflect">
-          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#ff8fc0" stroke-width="2"><path d="M12 2c5.33 4.55 8 8.48 8 13.5 0 5.33-3.58 9.5-8 9.5s-8-4.17-8-9.5c0-5.02 2.67-8.95 8-13.5z"/></svg>
-          <div class="lbl"><b>Reflect</b><span>On Your Experience</span></div>
-        </div>
-        <div class="btn" data-sound="track">
-          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#6fb0ff" stroke-width="2"><rect x="5" y="4" width="14" height="16" rx="2"/><path d="M9 9h6M9 13h6"/></svg>
-          <div class="lbl"><b>Track</b><span>Your Inner Journey</span></div>
-        </div>
-        <div class="btn gold" data-sound="explore">
-          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#ffd782" stroke-width="2"><circle cx="12" cy="10" r="6"/><path d="M9 21h6M10 17h4"/></svg>
-          <div class="lbl"><b>Explore</b><span>Deeper Insights</span></div>
-        </div>
-        <div class="btn purple" data-sound="resonate">
-          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#b39bff" stroke-width="2"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l3 3M15 15l3 3M18 6l-3 3M9 15l-3 3"/></svg>
-          <div class="lbl"><b>Be</b><span>Present Together</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="bottom">
-    <div class="steps">
-      <div class="step">
-        <div class="eye-wrap"><div class="ring"></div><div class="eye"></div></div>
-        <div class="smile"></div>
-        <div class="lbl">1. LOOK</div>
-      </div>
-      <div class="arrow"></div>
-      <div class="step">
-        <div class="eye-wrap"><div class="ring"></div>
-          <div class="eye"><div class="lid" style="height:40%"></div></div>
-        </div>
-        <div class="smile"></div>
-        <div class="lbl">2. CLOSING</div>
-      </div>
-      <div class="arrow"></div>
-      <div class="step">
-        <div class="eye-wrap"><div class="ring"></div>
-          <div class="eye"><div class="lid full" style="height:100%"><div class="lash-row"></div></div></div>
-        </div>
-        <div class="smile"></div>
-        <div class="lbl">3. BLINK</div>
-      </div>
-      <div class="arrow"></div>
-      <div class="step">
-        <div class="eye-wrap"><div class="ring"></div>
-          <div class="eye"><div class="lid" style="height:15%"></div></div>
-        </div>
-        <div class="smile"></div>
-        <div class="lbl">4. OPENING</div>
-      </div>
-      <div class="arrow"></div>
-      <div class="step">
-        <div class="eye-wrap"><div class="ring"></div>
-          <div class="eye"><div class="lid" style="height:10%"></div></div>
-        </div>
-        <div class="smile"></div>
-        <div class="lbl">5. WINK ☺</div>
-      </div>
-    </div>
-    <div class="quote-bar">
-      <div class="left">I blink to remind you… <span class="quote">"Slow down. Notice. You are here."</span></div>
-      <div class="right">💙 — KEMP EYE ☺</div>
-    </div>
-  </div>
+<div class="stars"></div>
+<div class="top">
+<div class="title-block">
+<h1><span class="k">KEMP</span><br><span class="e">EYE <span class="mini-eye-wrap"><div class="ring"></div><div class="eye"></div></span></span></h1>
+<div class="tagline">Your AI Tracker&nbsp; •&nbsp; Your Reflection Companion</div>
+<div class="ask-line">Ask · Feel · Express · Discover</div>
+<div class="notice-line">NOTICE&nbsp; •&nbsp; FEEL&nbsp; •&nbsp; TUNE&nbsp; •&nbsp; BE</div>
+</div>
+<div class="hero-col">
+<div class="eye-wrap hero-eye-wrap">
+<div class="ring"></div>
+<div class="eye hero-eye"></div>
+</div>
+<div class="hero-smile"></div>
+<div class="beam"></div>
+<div class="ripples"></div>
+</div>
+<div class="right-col">
+<div class="bubble">
+<div class="hi">Hi there! 💙</div>
+<div class="im">I'm <b>KEMP EYE</b> ☺</div>
+<p>I see your questions.<br>I feel your curiosity.<br>Let's explore together!</p>
+</div>
+<div class="buttons">
+<div class="btn" data-sound="ask">
+<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#6fb0ff" stroke-width="2"><path d="M4 4h16v12H8l-4 4z"/></svg>
+<div class="lbl"><b>Ask Me</b><span>Any Question</span></div>
+</div>
+<div class="btn pink" data-sound="reflect">
+<svg class="ic" viewBox="0 0 24 24" fill="#ff8fc0"><path d="M12 21c5.3-4.5 8-8.5 8-13.5 0-5.3-3.6-9.5-8-9.5s-8 4.2-8 9.5c0 5 2.7 9 8 13.5z"/></svg>
+<div class="lbl"><b>Reflect</b><span>On Your Experience</span></div>
+</div>
+<div class="btn" data-sound="track">
+<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#6fb0ff" stroke-width="2"><rect x="5" y="4" width="14" height="16" rx="2"/><path d="M9 9h6M9 13h6"/></svg>
+<div class="lbl"><b>Track</b><span>Your Inner Journey</span></div>
+</div>
+<div class="btn gold" data-sound="explore">
+<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#ffd782" stroke-width="2"><circle cx="12" cy="10" r="6"/><path d="M9 21h6M10 17h4"/></svg>
+<div class="lbl"><b>Explore</b><span>Deeper Insights</span></div>
+</div>
+<div class="btn purple" data-sound="resonate">
+<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#b39bff" stroke-width="2"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l3 3M15 15l3 3M18 6l-3 3M9 15l-3 3"/></svg>
+<div class="lbl"><b>Be</b><span>Present Together</span></div>
+</div>
+</div>
+</div>
+</div>
+<div class="bottom">
+<div class="steps">
+<div class="step">
+<div class="eye-wrap"><div class="ring"></div><div class="eye"></div></div>
+<div class="smile"></div>
+<div class="lbl">1. LOOK</div>
+</div>
+<div class="arrow"></div>
+<div class="step">
+<div class="eye-wrap"><div class="ring"></div><div class="eye"><div class="lid" style="height:40%"></div></div></div>
+<div class="smile"></div>
+<div class="lbl">2. CLOSING</div>
+</div>
+<div class="arrow"></div>
+<div class="step">
+<div class="eye-wrap"><div class="ring"></div><div class="eye"><div class="lid full" style="height:100%"><div class="lash-row"></div></div></div></div>
+<div class="smile"></div>
+<div class="lbl">3. BLINK</div>
+</div>
+<div class="arrow"></div>
+<div class="step">
+<div class="eye-wrap"><div class="ring"></div><div class="eye"><div class="lid" style="height:15%"></div></div></div>
+<div class="smile"></div>
+<div class="lbl">4. OPENING</div>
+</div>
+<div class="arrow"></div>
+<div class="step">
+<div class="eye-wrap"><div class="ring"></div><div class="eye"><div class="lid" style="height:10%"></div></div></div>
+<div class="smile"></div>
+<div class="lbl">5. WINK ☺</div>
+</div>
+</div>
+<div class="quote-bar">
+<div class="left">I blink to remind you… <span class="quote">"Slow down. Notice. You are here."</span></div>
+<div class="right">💙 — KEMP EYE ☺</div>
+</div>
+</div>
 </div>
 
 <div class="audio-control">
-  <div class="title">🎵 Soundscape</div>
-  <input type="range" class="volume-slider" id="volumeControl" min="0" max="100" value="50">
-  <div class="audio-buttons">
-    <button class="audio-btn active" data-audio="ambient">Ambient</button>
-    <button class="audio-btn" data-audio="singing-bowl">Bowl</button>
-    <button class="audio-btn" data-audio="binaural">Binaural</button>
-  </div>
-  <div class="audio-status" id="audioStatus">🎵 Click to start</div>
+<div class="title">🎵 Soundscape</div>
+<input type="range" class="volume-slider" id="volumeControl" min="0" max="100" value="50">
+<div class="audio-buttons">
+<button class="audio-btn active" data-audio="ambient">Ambient</button>
+<button class="audio-btn" data-audio="singing-bowl">Bowl</button>
+<button class="audio-btn" data-audio="binaural">Binaural</button>
+</div>
+<div class="audio-status" id="audioStatus">🎵 Click to start</div>
 </div>
 
 <audio id="ambientAudio" loop></audio>
@@ -524,138 +205,7 @@
 <audio id="resonateSound"></audio>
 
 <script>
-  const audioSources = {
-    ambient: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
-    'singing-bowl': 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
-    binaural: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3',
-    ask: 'https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3',
-    reflect: 'https://assets.mixkit.co/active_storage/sfx/2870/2870-preview.mp3',
-    track: 'https://assets.mixkit.co/active_storage/sfx/2871/2871-preview.mp3',
-    explore: 'https://assets.mixkit.co/active_storage/sfx/2872/2872-preview.mp3',
-    resonate: 'https://assets.mixkit.co/active_storage/sfx/2873/2873-preview.mp3'
-  };
-
-  let currentAudio = 'ambient';
-  let hasUserInteraction = false;
-
-  function initAudioOnce() {
-    hasUserInteraction = true;
-    document.removeEventListener('click', initAudioOnce);
-    document.removeEventListener('touchstart', initAudioOnce);
-    console.log('Audio context initialized');
-  }
-
-  document.addEventListener('click', initAudioOnce);
-  document.addEventListener('touchstart', initAudioOnce);
-
-  document.getElementById('ambientAudio').src = audioSources.ambient;
-  document.getElementById('singingBowlAudio').src = audioSources['singing-bowl'];
-  document.getElementById('binauralAudio').src = audioSources.binaural;
-  
-  document.getElementById('askSound').src = audioSources.ask;
-  document.getElementById('reflectSound').src = audioSources.reflect;
-  document.getElementById('trackSound').src = audioSources.track;
-  document.getElementById('exploreSound').src = audioSources.explore;
-  document.getElementById('resonateSound').src = audioSources.resonate;
-
-  const volumeControl = document.getElementById('volumeControl');
-  const ambientAudio = document.getElementById('ambientAudio');
-  const singingBowlAudio = document.getElementById('singingBowlAudio');
-  const binauralAudio = document.getElementById('binauralAudio');
-
-  volumeControl.addEventListener('input', (e) => {
-    const volume = e.target.value / 100;
-    ambientAudio.volume = volume;
-    singingBowlAudio.volume = volume;
-    binauralAudio.volume = volume;
-  });
-
-  ambientAudio.volume = 0.5;
-  singingBowlAudio.volume = 0.5;
-  binauralAudio.volume = 0.5;
-
-  const audioButtons = document.querySelectorAll('.audio-btn[data-audio]');
-  const audioStatus = document.getElementById('audioStatus');
-
-  audioButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      ambientAudio.pause();
-      singingBowlAudio.pause();
-      binauralAudio.pause();
-      
-      audioButtons.forEach(b => b.classList.remove('active'));
-      
-      btn.classList.add('active');
-      currentAudio = btn.dataset.audio;
-      
-      let audioElement;
-      const statusText = {
-        ambient: '🎵 Ambient playing',
-        'singing-bowl': '🎵 Singing bowl playing',
-        binaural: '🎵 Binaural beats playing'
-      };
-      
-      switch(currentAudio) {
-        case 'ambient':
-          audioElement = ambientAudio;
-          break;
-        case 'singing-bowl':
-          audioElement = singingBowlAudio;
-          break;
-        case 'binaural':
-          audioElement = binauralAudio;
-          break;
-      }
-      
-      audioElement.currentTime = 0;
-      const playPromise = audioElement.play();
-      
-      if (playPromise !== undefined) {
-        playPromise
-          .then(() => {
-            audioStatus.textContent = statusText[currentAudio];
-            console.log('Audio playing: ' + currentAudio);
-          })
-          .catch((err) => {
-            console.error('Audio playback failed:', err);
-            audioStatus.textContent = '⚠️ Playback failed';
-          });
-      }
-    });
-  });
-
-  const buttons = document.querySelectorAll('.btn[data-sound]');
-  buttons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const soundType = btn.dataset.sound;
-      const soundElement = document.getElementById(soundType + 'Sound');
-      
-      if (soundElement && soundElement.src) {
-        soundElement.currentTime = 0;
-        const playPromise = soundElement.play();
-        
-        if (playPromise !== undefined) {
-          playPromise.catch(err => console.log('Sound playback error:', err));
-        }
-      }
-    });
-  });
-
-  document.querySelectorAll('.eye').forEach(el => {
-    el.style.backgroundColor = '#2d2560';
-  });
-
-  const hero = document.querySelector('.hero-eye');
-  if (hero) {
-    setInterval(() => {
-      hero.style.transition = 'transform .12s ease-in-out';
-      hero.style.transform = 'scaleY(0.15)';
-      setTimeout(() => { hero.style.transform = 'scaleY(1)'; }, 140);
-    }, 6000);
-  }
-
-  console.log('KEMP EYE Audio System Initialized');
-  console.log('Audio sources loaded:', audioSources);
+const audioSources={ambient:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3','singing-bowl':'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',binaural:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3',ask:'https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3',reflect:'https://assets.mixkit.co/active_storage/sfx/2870/2870-preview.mp3',track:'https://assets.mixkit.co/active_storage/sfx/2871/2871-preview.mp3',explore:'https://assets.mixkit.co/active_storage/sfx/2872/2872-preview.mp3',resonate:'https://assets.mixkit.co/active_storage/sfx/2873/2873-preview.mp3'};let currentAudio='ambient';let hasUserInteraction=false;function initAudioOnce(){hasUserInteraction=true;document.removeEventListener('click',initAudioOnce);document.removeEventListener('touchstart',initAudioOnce);console.log('Audio context initialized');}document.addEventListener('click',initAudioOnce);document.addEventListener('touchstart',initAudioOnce);document.getElementById('ambientAudio').src=audioSources.ambient;document.getElementById('singingBowlAudio').src=audioSources['singing-bowl'];document.getElementById('binauralAudio').src=audioSources.binaural;document.getElementById('askSound').src=audioSources.ask;document.getElementById('reflectSound').src=audioSources.reflect;document.getElementById('trackSound').src=audioSources.track;document.getElementById('exploreSound').src=audioSources.explore;document.getElementById('resonateSound').src=audioSources.resonate;const volumeControl=document.getElementById('volumeControl');const ambientAudio=document.getElementById('ambientAudio');const singingBowlAudio=document.getElementById('singingBowlAudio');const binauralAudio=document.getElementById('binauralAudio');volumeControl.addEventListener('input',(e)=>{const volume=e.target.value/100;ambientAudio.volume=volume;singingBowlAudio.volume=volume;binauralAudio.volume=volume;});ambientAudio.volume=0.5;singingBowlAudio.volume=0.5;binauralAudio.volume=0.5;const audioButtons=document.querySelectorAll('.audio-btn[data-audio]');const audioStatus=document.getElementById('audioStatus');audioButtons.forEach(btn=>{btn.addEventListener('click',()=>{ambientAudio.pause();singingBowlAudio.pause();binauralAudio.pause();audioButtons.forEach(b=>b.classList.remove('active'));btn.classList.add('active');currentAudio=btn.dataset.audio;let audioElement;const statusText={ambient:'🎵 Ambient playing','singing-bowl':'🎵 Singing bowl playing',binaural:'🎵 Binaural beats playing'};switch(currentAudio){case 'ambient':audioElement=ambientAudio;break;case 'singing-bowl':audioElement=singingBowlAudio;break;case 'binaural':audioElement=binauralAudio;break;}audioElement.currentTime=0;const playPromise=audioElement.play();if(playPromise!==undefined){playPromise.then(()=>{audioStatus.textContent=statusText[currentAudio];console.log('Audio playing: '+currentAudio);}).catch((err)=>{console.error('Audio playback failed:',err);audioStatus.textContent='⚠️ Playback failed'});}});});const buttons=document.querySelectorAll('.btn[data-sound]');buttons.forEach(btn=>{btn.addEventListener('click',()=>{const soundType=btn.dataset.sound;const soundElement=document.getElementById(soundType+'Sound');if(soundElement&&soundElement.src){soundElement.currentTime=0;const playPromise=soundElement.play();if(playPromise!==undefined){playPromise.catch(err=>console.log('Sound playback error:',err));}}});});console.log('KEMP EYE Audio System Initialized');console.log('All audio sources ready');
 </script>
 </body>
 </html>
