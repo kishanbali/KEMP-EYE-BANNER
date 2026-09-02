@@ -20,19 +20,17 @@
     --ring-blue:#6fb0ff;
   }
   *{box-sizing:border-box;}
-  /* Reset page-level spacing and prevent horizontal scroll */
   html,body{margin:0;padding:0;width:100%;overflow-x:hidden;background:#000;}
   body{
     font-family:'Poppins',sans-serif;
     color:var(--ink);
     display:flex;
     justify-content:center;
-    /* moved outer spacing into banner/layout so body stays flush */
   }
   .banner{
     position:relative;
     width:100%;
-    max-width:100%; /* allow the main card to span full parent width */
+    max-width:100%;
     border-radius:22px;
     overflow:hidden;
     background:
@@ -42,7 +40,7 @@
       radial-gradient(500px 400px at 92% 62%, rgba(90,160,255,0.14), transparent 60%),
       linear-gradient(180deg, var(--bg-mid) 0%, var(--bg-deep) 46%, #06070f 100%);
     box-shadow: 0 30px 80px rgba(0,0,0,0.55);
-    padding:24px; /* restore the previous body padding inside the banner */
+    padding:24px;
   }
   .stars{
     position:absolute; inset:0;
@@ -59,8 +57,6 @@
     opacity:.9;
     pointer-events:none;
   }
-
-  /* ---------- TOP SECTION ---------- */
   .top{
     position:relative;
     display:flex;
@@ -75,7 +71,6 @@
   .right-col{ flex:1 1 460px; display:flex; gap:18px; align-items:flex-start; flex-wrap:wrap; }
   .right-col .bubble{ flex:1 1 300px; }
   .right-col .buttons{ flex:0 0 190px; }
-
   .title-block h1{
     margin:0;
     font-family:'Poppins',sans-serif;
@@ -123,8 +118,6 @@
     color:#c9d2f0;
     font-weight:600;
   }
-
-  /* ---------- Eye component (reused everywhere) ---------- */
   .eye{
     border-radius:50%;
     background-size:cover;
@@ -135,7 +128,7 @@
       inset 0 0 18px rgba(0,0,0,0.35),
       inset 8px 8px 20px rgba(255,255,255,0.15);
   }
-  .eye::before{ /* glossy specular highlight */
+  .eye::before{
     content:"";
     position:absolute;
     top:8%; left:12%;
@@ -144,7 +137,7 @@
     border-radius:50%;
     filter:blur(2px);
   }
-  .eye::after{ /* cool rim tint */
+  .eye::after{
     content:"";
     position:absolute; inset:0;
     border-radius:50%;
@@ -166,7 +159,6 @@
     box-shadow:0 0 12px 2px rgba(255,215,130,0.55);
   }
   .eye-wrap{ position:relative; display:inline-block; }
-
   .lid{
     position:absolute;
     left:-2px; right:-2px; top:-2px;
@@ -195,13 +187,12 @@
     clip-path:polygon(0 100%,3px 0,6px 100%,9px 0,12px 100%,15px 0,18px 100%,21px 0,24px 100%,27px 0,30px 100%);
     opacity:.85;
   }
-
-  /* ---------- CENTER hero eye ---------- */
   .hero-col{ display:flex; flex-direction:column; align-items:center; }
   .hero-eye-wrap{ width:min(360px,26vw); }
   .hero-eye{
     width:100%; padding-top:100%;
-    background-image:url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFB[...]
+    background-color:#2d2560;
+    border-radius:50%;
   }
   .hero-eye .lid{ height:36%; }
   .hero-smile{
@@ -227,8 +218,6 @@
     border-radius:50%;
     opacity:.8;
   }
-
-  /* ---------- Speech bubble ---------- */
   .bubble{
     position:relative;
     background:var(--panel);
@@ -263,8 +252,6 @@
   .bubble .im{ font-size:19px; margin:6px 0; }
   .bubble .im b{ color:var(--gold); }
   .bubble p{ margin:4px 0; font-size:15px; color:#dfe4fb; line-height:1.5;}
-
-  /* ---------- Buttons column ---------- */
   .buttons{ display:flex; flex-direction:column; gap:10px; width:100%; }
   .btn{
     display:flex; align-items:center; gap:12px;
@@ -287,8 +274,6 @@
   .btn.pink{ border-color:#ff8fc0; box-shadow:0 0 14px rgba(255,143,192,0.25); }
   .btn.gold{ border-color:var(--gold); box-shadow:0 0 14px rgba(255,215,130,0.3); }
   .btn.purple{ border-color:#b39bff; box-shadow:0 0 14px rgba(179,155,255,0.25); }
-
-  /* ---------- Audio Control Panel ---------- */
   .audio-control{
     position:fixed; bottom:20px; right:20px;
     background:var(--panel);
@@ -370,8 +355,6 @@
     height:16px;
     font-style:italic;
   }
-
-  /* ---------- BOTTOM SECTION ---------- */
   .bottom{ position:relative; padding:34px 40px 30px; }
   .steps{
     display:flex; justify-content:space-between; align-items:flex-start;
@@ -400,7 +383,6 @@
     content:""; position:absolute; right:0; top:0;
     border-top:7px solid transparent; border-bottom:7px solid transparent; border-left:12px solid var(--gold);
   }
-
   .quote-bar{
     max-width:1300px; margin:34px auto 0;
     border:2px solid #8fb6ff;
@@ -414,7 +396,6 @@
   .quote-bar .left{ font-size:17px; }
   .quote-bar .left .quote{ color:var(--gold); font-weight:700; }
   .quote-bar .right{ font-weight:700; color:var(--gold); font-size:16px; white-space:nowrap; }
-
   @media (max-width:900px){
     .top{ grid-template-columns:1fr; text-align:center; }
     .title-block .e{ justify-content:center; }
@@ -429,17 +410,13 @@
 <body>
 <div class="banner">
   <div class="stars"></div>
-
-  <!-- ============ TOP ============ -->
   <div class="top">
-
     <div class="title-block">
       <h1><span class="k">KEMP</span><br><span class="e">EYE <span class="mini-eye-wrap"><div class="ring"></div><div class="eye"></div></span></span></h1>
       <div class="tagline">Your AI Tracker&nbsp; •&nbsp; Your Reflection Companion</div>
       <div class="ask-line">Ask · Feel · Express · Discover</div>
       <div class="notice-line">NOTICE&nbsp; •&nbsp; FEEL&nbsp; •&nbsp; TUNE&nbsp; •&nbsp; BE</div>
     </div>
-
     <div class="hero-col">
       <div class="eye-wrap hero-eye-wrap">
         <div class="ring"></div>
@@ -449,21 +426,19 @@
       <div class="beam"></div>
       <div class="ripples"></div>
     </div>
-
     <div class="right-col">
       <div class="bubble">
         <div class="hi">Hi there! 💙</div>
         <div class="im">I'm <b>KEMP EYE</b> ☺</div>
         <p>I see your questions.<br>I feel your curiosity.<br>Let's explore together!</p>
       </div>
-
       <div class="buttons">
         <div class="btn" data-sound="ask">
           <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#6fb0ff" stroke-width="2"><path d="M4 4h16v12H8l-4 4z"/></svg>
           <div class="lbl"><b>Ask Me</b><span>Any Question</span></div>
         </div>
         <div class="btn pink" data-sound="reflect">
-          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#ff8fc0" stroke-width="2"><path d="M12 21s-7-4.6-9.5-9C.7 8.4 2.3 5 6 5c2 0 3.3 1 4 2 .7-1 2-2 4-2 3.7 0 5.3 3.4 3.5 7-2.5 4.4-9 [...]
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#ff8fc0" stroke-width="2"><path d="M12 2c5.33 4.55 8 8.48 8 13.5 0 5.33-3.58 9.5-8 9.5s-8-4.17-8-9.5c0-5.02 2.67-8.95 8-13.5z"/></svg>
           <div class="lbl"><b>Reflect</b><span>On Your Experience</span></div>
         </div>
         <div class="btn" data-sound="track">
@@ -481,18 +456,14 @@
       </div>
     </div>
   </div>
-
-  <!-- ============ BOTTOM ============ -->
   <div class="bottom">
     <div class="steps">
-
       <div class="step">
         <div class="eye-wrap"><div class="ring"></div><div class="eye"></div></div>
         <div class="smile"></div>
         <div class="lbl">1. LOOK</div>
       </div>
       <div class="arrow"></div>
-
       <div class="step">
         <div class="eye-wrap"><div class="ring"></div>
           <div class="eye"><div class="lid" style="height:40%"></div></div>
@@ -501,7 +472,6 @@
         <div class="lbl">2. CLOSING</div>
       </div>
       <div class="arrow"></div>
-
       <div class="step">
         <div class="eye-wrap"><div class="ring"></div>
           <div class="eye"><div class="lid full" style="height:100%"><div class="lash-row"></div></div></div>
@@ -510,7 +480,6 @@
         <div class="lbl">3. BLINK</div>
       </div>
       <div class="arrow"></div>
-
       <div class="step">
         <div class="eye-wrap"><div class="ring"></div>
           <div class="eye"><div class="lid" style="height:15%"></div></div>
@@ -519,7 +488,6 @@
         <div class="lbl">4. OPENING</div>
       </div>
       <div class="arrow"></div>
-
       <div class="step">
         <div class="eye-wrap"><div class="ring"></div>
           <div class="eye"><div class="lid" style="height:10%"></div></div>
@@ -527,9 +495,7 @@
         <div class="smile"></div>
         <div class="lbl">5. WINK ☺</div>
       </div>
-
     </div>
-
     <div class="quote-bar">
       <div class="left">I blink to remind you… <span class="quote">"Slow down. Notice. You are here."</span></div>
       <div class="right">💙 — KEMP EYE ☺</div>
@@ -537,7 +503,6 @@
   </div>
 </div>
 
-<!-- ============ AUDIO CONTROL PANEL ============ -->
 <div class="audio-control">
   <div class="title">🎵 Soundscape</div>
   <input type="range" class="volume-slider" id="volumeControl" min="0" max="100" value="50">
@@ -549,7 +514,6 @@
   <div class="audio-status" id="audioStatus">🎵 Click to start</div>
 </div>
 
-<!-- ============ HIDDEN AUDIO ELEMENTS ============ -->
 <audio id="ambientAudio" loop></audio>
 <audio id="singingBowlAudio" loop></audio>
 <audio id="binauralAudio" loop></audio>
@@ -560,9 +524,6 @@
 <audio id="resonateSound"></audio>
 
 <script>
-  // ============ AUDIO SOURCES ============
-  // Using CORS-compliant audio URLs
-  
   const audioSources = {
     ambient: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
     'singing-bowl': 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
@@ -574,11 +535,9 @@
     resonate: 'https://assets.mixkit.co/active_storage/sfx/2873/2873-preview.mp3'
   };
 
-  // ============ AUDIO INITIALIZATION ============
   let currentAudio = 'ambient';
   let hasUserInteraction = false;
 
-  // Initialize audio on first user interaction
   function initAudioOnce() {
     hasUserInteraction = true;
     document.removeEventListener('click', initAudioOnce);
@@ -589,7 +548,6 @@
   document.addEventListener('click', initAudioOnce);
   document.addEventListener('touchstart', initAudioOnce);
 
-  // Set audio sources
   document.getElementById('ambientAudio').src = audioSources.ambient;
   document.getElementById('singingBowlAudio').src = audioSources['singing-bowl'];
   document.getElementById('binauralAudio').src = audioSources.binaural;
@@ -600,7 +558,6 @@
   document.getElementById('exploreSound').src = audioSources.explore;
   document.getElementById('resonateSound').src = audioSources.resonate;
 
-  // ============ VOLUME CONTROL ============
   const volumeControl = document.getElementById('volumeControl');
   const ambientAudio = document.getElementById('ambientAudio');
   const singingBowlAudio = document.getElementById('singingBowlAudio');
@@ -617,21 +574,17 @@
   singingBowlAudio.volume = 0.5;
   binauralAudio.volume = 0.5;
 
-  // ============ AMBIENT AUDIO SWITCHER ============
   const audioButtons = document.querySelectorAll('.audio-btn[data-audio]');
   const audioStatus = document.getElementById('audioStatus');
 
   audioButtons.forEach(btn => {
     btn.addEventListener('click', () => {
-      // Stop all audio
       ambientAudio.pause();
       singingBowlAudio.pause();
       binauralAudio.pause();
       
-      // Remove active class from all buttons
       audioButtons.forEach(b => b.classList.remove('active'));
       
-      // Set active button
       btn.classList.add('active');
       currentAudio = btn.dataset.audio;
       
@@ -654,7 +607,6 @@
           break;
       }
       
-      // Reset and play audio
       audioElement.currentTime = 0;
       const playPromise = audioElement.play();
       
@@ -672,7 +624,6 @@
     });
   });
 
-  // ============ BUTTON CLICK SOUNDS ============
   const buttons = document.querySelectorAll('.btn[data-sound]');
   buttons.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -690,10 +641,8 @@
     });
   });
 
-  // ============ EYE IMAGE & ANIMATIONS ============
-  const EYE_SRC = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUF[...]
   document.querySelectorAll('.eye').forEach(el => {
-    el.style.backgroundImage = `url('${EYE_SRC}')`;
+    el.style.backgroundColor = '#2d2560';
   });
 
   const hero = document.querySelector('.hero-eye');
@@ -705,7 +654,6 @@
     }, 6000);
   }
 
-  // ============ DEBUG LOGGING ============
   console.log('KEMP EYE Audio System Initialized');
   console.log('Audio sources loaded:', audioSources);
 </script>
