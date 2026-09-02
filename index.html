@@ -637,13 +637,16 @@
           break;
       }
       
-      audioElement.play().catch(err => {
-        console.log('Audio playback failed:', err);
-        audioStatus.textContent = '⚠️ Click to enable audio';
-      });
+      audioElement.play()
+  .then(() => {
+    audioStatus.textContent = statusText[currentAudio];
+  })
+  .catch((err) => {
+    console.log('Audio playback failed:', err);
+    audioStatus.textContent = '⚠️ Click to enable audio';
+  });
       
-      audioStatus.textContent = statusText[currentAudio];
-    });
+      
   });
 
   window.addEventListener('load', () => {
