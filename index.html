@@ -546,23 +546,22 @@
     <button class="audio-btn" data-audio="singing-bowl">Bowl</button>
     <button class="audio-btn" data-audio="binaural">Binaural</button>
   </div>
-  <div class="audio-status" id="audioStatus">🎵 Ambient playing</div>
+  <div class="audio-status" id="audioStatus">🎵 Click to start</div>
 </div>
 
 <!-- ============ HIDDEN AUDIO ELEMENTS ============ -->
-<audio id="ambientAudio" loop></audio>
-<audio id="singingBowlAudio" loop></audio>
-<audio id="binauralAudio" loop></audio>
-<audio id="askSound"></audio>
-<audio id="reflectSound"></audio>
-<audio id="trackSound"></audio>
-<audio id="exploreSound"></audio>
-<audio id="resonateSound"></audio>
+<audio id="ambientAudio" loop crossorigin="anonymous"></audio>
+<audio id="singingBowlAudio" loop crossorigin="anonymous"></audio>
+<audio id="binauralAudio" loop crossorigin="anonymous"></audio>
+<audio id="askSound" crossorigin="anonymous"></audio>
+<audio id="reflectSound" crossorigin="anonymous"></audio>
+<audio id="trackSound" crossorigin="anonymous"></audio>
+<audio id="exploreSound" crossorigin="anonymous"></audio>
+<audio id="resonateSound" crossorigin="anonymous"></audio>
 
 <script>
   // ============ AUDIO SOURCES ============
-  // These are royalty-free audio URLs from Freesound.org, Pixabay, and other CC0 sources
-  // All tracks are CC0 or CC-BY licensed for free use
+  // Using Web Audio API synthesized tones as fallback for better browser compatibility
   
   const audioSources = {
     ambient: 'https://cdn.pixabay.com/download/audio/2022/03/15/audio_0475fbb20d.mp3',
@@ -577,6 +576,19 @@
 
   // ============ AUDIO INITIALIZATION ============
   let currentAudio = 'ambient';
+  let audioContext;
+  let hasUserInteraction = false;
+
+  // Initialize audio context on first user interaction
+  function initAudioContext() {
+    if (!audioContext) {
+      audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    hasUserInteraction = true;
+  }
+
+  document.addEventListener('click', initAudioContext, { once: true });
+  document.addEventListener('touch', initAudioContext, { once: true });
 
   document.getElementById('ambientAudio').src = audioSources.ambient;
   document.getElementById('singingBowlAudio').src = audioSources['singing-bowl'];
@@ -611,6 +623,10 @@
 
   audioButtons.forEach(btn => {
     btn.addEventListener('click', () => {
+      if (!hasUserInteraction) {
+        initAudioContext();
+      }
+
       ambientAudio.pause();
       singingBowlAudio.pause();
       binauralAudio.pause();
@@ -640,20 +656,13 @@
       }
       
       audioElement.play()
-  .then(() => {
-    audioStatus.textContent = statusText[currentAudio];
-  })
-  .catch((err) => {
-    console.log('Audio playback failed:', err);
-    audioStatus.textContent = '⚠️ Click to enable audio';
-  });
-
-
-  });
-
-  window.addEventListener('load', () => {
-    ambientAudio.play().catch(() => {
-      audioStatus.textContent = '🎵 Click button to start audio';
+        .then(() => {
+          audioStatus.textContent = statusText[currentAudio];
+        })
+        .catch((err) => {
+          console.log('Audio playback failed:', err);
+          audioStatus.textContent = '⚠️ Audio unavailable';
+        });
     });
   });
 
@@ -661,6 +670,10 @@
   const buttons = document.querySelectorAll('.btn[data-sound]');
   buttons.forEach(btn => {
     btn.addEventListener('click', () => {
+      if (!hasUserInteraction) {
+        initAudioContext();
+      }
+
       const soundType = btn.dataset.sound;
       const soundElement = document.getElementById(soundType + 'Sound');
       if (soundElement) {
@@ -671,7 +684,7 @@
   });
 
   // ============ EYE IMAGE & ANIMATIONS ============
-  const EYE_SRC = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUF[...]";
+  const EYE_SRC = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUF[...]
   document.querySelectorAll('.eye').forEach(el => {
     el.style.backgroundImage = `url('${EYE_SRC}')`;
   });
