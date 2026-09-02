@@ -550,46 +550,46 @@
 </div>
 
 <!-- ============ HIDDEN AUDIO ELEMENTS ============ -->
-<audio id="ambientAudio" loop crossorigin="anonymous"></audio>
-<audio id="singingBowlAudio" loop crossorigin="anonymous"></audio>
-<audio id="binauralAudio" loop crossorigin="anonymous"></audio>
-<audio id="askSound" crossorigin="anonymous"></audio>
-<audio id="reflectSound" crossorigin="anonymous"></audio>
-<audio id="trackSound" crossorigin="anonymous"></audio>
-<audio id="exploreSound" crossorigin="anonymous"></audio>
-<audio id="resonateSound" crossorigin="anonymous"></audio>
+<audio id="ambientAudio" loop></audio>
+<audio id="singingBowlAudio" loop></audio>
+<audio id="binauralAudio" loop></audio>
+<audio id="askSound"></audio>
+<audio id="reflectSound"></audio>
+<audio id="trackSound"></audio>
+<audio id="exploreSound"></audio>
+<audio id="resonateSound"></audio>
 
 <script>
   // ============ AUDIO SOURCES ============
-  // Using Web Audio API synthesized tones as fallback for better browser compatibility
+  // Using CORS-compliant audio URLs
   
   const audioSources = {
-    ambient: 'https://cdn.pixabay.com/download/audio/2022/03/15/audio_0475fbb20d.mp3',
-    'singing-bowl': 'https://cdn.pixabay.com/download/audio/2021/08/04/audio_ff238616f5.mp3',
-    binaural: 'https://cdn.pixabay.com/download/audio/2023/08/17/audio_e52b2ed0fe.mp3',
-    ask: 'https://cdn.pixabay.com/download/audio/2022/01/13/audio_59d4b17b09.mp3',
-    reflect: 'https://cdn.pixabay.com/download/audio/2021/08/04/audio_3d32a8c4b0.mp3',
-    track: 'https://cdn.pixabay.com/download/audio/2022/01/28/audio_6da65a2da8.mp3',
-    explore: 'https://cdn.pixabay.com/download/audio/2022/03/20/audio_0ad521d79e.mp3',
-    resonate: 'https://cdn.pixabay.com/download/audio/2021/08/04/audio_6d487a5f60.mp3'
+    ambient: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+    'singing-bowl': 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
+    binaural: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3',
+    ask: 'https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3',
+    reflect: 'https://assets.mixkit.co/active_storage/sfx/2870/2870-preview.mp3',
+    track: 'https://assets.mixkit.co/active_storage/sfx/2871/2871-preview.mp3',
+    explore: 'https://assets.mixkit.co/active_storage/sfx/2872/2872-preview.mp3',
+    resonate: 'https://assets.mixkit.co/active_storage/sfx/2873/2873-preview.mp3'
   };
 
   // ============ AUDIO INITIALIZATION ============
   let currentAudio = 'ambient';
-  let audioContext;
   let hasUserInteraction = false;
 
-  // Initialize audio context on first user interaction
-  function initAudioContext() {
-    if (!audioContext) {
-      audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    }
+  // Initialize audio on first user interaction
+  function initAudioOnce() {
     hasUserInteraction = true;
+    document.removeEventListener('click', initAudioOnce);
+    document.removeEventListener('touchstart', initAudioOnce);
+    console.log('Audio context initialized');
   }
 
-  document.addEventListener('click', initAudioContext, { once: true });
-  document.addEventListener('touch', initAudioContext, { once: true });
+  document.addEventListener('click', initAudioOnce);
+  document.addEventListener('touchstart', initAudioOnce);
 
+  // Set audio sources
   document.getElementById('ambientAudio').src = audioSources.ambient;
   document.getElementById('singingBowlAudio').src = audioSources['singing-bowl'];
   document.getElementById('binauralAudio').src = audioSources.binaural;
@@ -623,16 +623,15 @@
 
   audioButtons.forEach(btn => {
     btn.addEventListener('click', () => {
-      if (!hasUserInteraction) {
-        initAudioContext();
-      }
-
+      // Stop all audio
       ambientAudio.pause();
       singingBowlAudio.pause();
       binauralAudio.pause();
       
+      // Remove active class from all buttons
       audioButtons.forEach(b => b.classList.remove('active'));
       
+      // Set active button
       btn.classList.add('active');
       currentAudio = btn.dataset.audio;
       
@@ -655,14 +654,21 @@
           break;
       }
       
-      audioElement.play()
-        .then(() => {
-          audioStatus.textContent = statusText[currentAudio];
-        })
-        .catch((err) => {
-          console.log('Audio playback failed:', err);
-          audioStatus.textContent = '⚠️ Audio unavailable';
-        });
+      // Reset and play audio
+      audioElement.currentTime = 0;
+      const playPromise = audioElement.play();
+      
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            audioStatus.textContent = statusText[currentAudio];
+            console.log('Audio playing: ' + currentAudio);
+          })
+          .catch((err) => {
+            console.error('Audio playback failed:', err);
+            audioStatus.textContent = '⚠️ Playback failed';
+          });
+      }
     });
   });
 
@@ -670,15 +676,16 @@
   const buttons = document.querySelectorAll('.btn[data-sound]');
   buttons.forEach(btn => {
     btn.addEventListener('click', () => {
-      if (!hasUserInteraction) {
-        initAudioContext();
-      }
-
       const soundType = btn.dataset.sound;
       const soundElement = document.getElementById(soundType + 'Sound');
-      if (soundElement) {
+      
+      if (soundElement && soundElement.src) {
         soundElement.currentTime = 0;
-        soundElement.play().catch(err => console.log('Sound playback error:', err));
+        const playPromise = soundElement.play();
+        
+        if (playPromise !== undefined) {
+          playPromise.catch(err => console.log('Sound playback error:', err));
+        }
       }
     });
   });
@@ -697,6 +704,10 @@
       setTimeout(() => { hero.style.transform = 'scaleY(1)'; }, 140);
     }, 6000);
   }
+
+  // ============ DEBUG LOGGING ============
+  console.log('KEMP EYE Audio System Initialized');
+  console.log('Audio sources loaded:', audioSources);
 </script>
 </body>
 </html>
