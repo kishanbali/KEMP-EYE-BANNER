@@ -20,18 +20,19 @@
     --ring-blue:#6fb0ff;
   }
   *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;background:#000;}
+  /* Reset page-level spacing and prevent horizontal scroll */
+  html,body{margin:0;padding:0;width:100%;overflow-x:hidden;background:#000;}
   body{
     font-family:'Poppins',sans-serif;
     color:var(--ink);
     display:flex;
     justify-content:center;
-    padding:24px;
+    /* moved outer spacing into banner/layout so body stays flush */
   }
   .banner{
     position:relative;
     width:100%;
-    max-width:1536px;
+    max-width:100%; /* allow the main card to span full parent width */
     border-radius:22px;
     overflow:hidden;
     background:
@@ -41,6 +42,7 @@
       radial-gradient(500px 400px at 92% 62%, rgba(90,160,255,0.14), transparent 60%),
       linear-gradient(180deg, var(--bg-mid) 0%, var(--bg-deep) 46%, #06070f 100%);
     box-shadow: 0 30px 80px rgba(0,0,0,0.55);
+    padding:24px; /* restore the previous body padding inside the banner */
   }
   .stars{
     position:absolute; inset:0;
@@ -199,7 +201,7 @@
   .hero-eye-wrap{ width:min(360px,26vw); }
   .hero-eye{
     width:100%; padding-top:100%;
-    background-image:url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUF[...]
+    background-image:url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFB[...]
   }
   .hero-eye .lid{ height:36%; }
   .hero-smile{
@@ -461,7 +463,7 @@
           <div class="lbl"><b>Ask Me</b><span>Any Question</span></div>
         </div>
         <div class="btn pink" data-sound="reflect">
-          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#ff8fc0" stroke-width="2"><path d="M12 21s-7-4.6-9.5-9C.7 8.4 2.3 5 6 5c2 0 3.3 1 4 2 .7-1 2-2 4-2 3.7 0 5.3 3.4 3.5 7-2.5 4.4-9 5-9 5z"/></svg>
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#ff8fc0" stroke-width="2"><path d="M12 21s-7-4.6-9.5-9C.7 8.4 2.3 5 6 5c2 0 3.3 1 4 2 .7-1 2-2 4-2 3.7 0 5.3 3.4 3.5 7-2.5 4.4-9 [...]
           <div class="lbl"><b>Reflect</b><span>On Your Experience</span></div>
         </div>
         <div class="btn" data-sound="track">
@@ -645,8 +647,8 @@
     console.log('Audio playback failed:', err);
     audioStatus.textContent = '⚠️ Click to enable audio';
   });
-      
-      
+
+
   });
 
   window.addEventListener('load', () => {
@@ -669,7 +671,7 @@
   });
 
   // ============ EYE IMAGE & ANIMATIONS ============
-  const EYE_SRC = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUF[...]
+  const EYE_SRC = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUF[...]";
   document.querySelectorAll('.eye').forEach(el => {
     el.style.backgroundImage = `url('${EYE_SRC}')`;
   });
